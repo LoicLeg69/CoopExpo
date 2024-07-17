@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./Login.css";
 
 function Signup() {
-  // React States
+  // États React
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const ApiUrl = import.meta.env.VITE_API_URL;
 
   const errors = {
     uname: "Nom d'utilisateur invalide",
@@ -12,13 +13,13 @@ function Signup() {
     pass: "Mot de passe invalide",
   };
 
-  const handleSubmit = (event) => {
-    // Prevent page reload
+  const handleSubmit = async (event) => {
+    // Empêche le rechargement de la page
     event.preventDefault();
 
     const { uname, mail, pass } = document.forms[0];
 
-    // Simple validation checks
+    // Vérifications simples
     if (uname.value.length < 3) {
       setErrorMessages({ name: "uname", message: errors.uname });
     } else if (!/\S+@\S+\.\S+/.test(mail.value)) {
@@ -26,18 +27,38 @@ function Signup() {
     } else if (pass.value.length < 6) {
       setErrorMessages({ name: "pass", message: errors.pass });
     } else {
-      // If no errors, submit form
-      setIsSubmitted(true);
+      try {
+        const response = await fetch(`${ApiUrl}/auth/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: uname.value,
+            mail: mail.value,
+            password: pass.value,
+          }),
+        });
+
+        if (response.ok) {
+          setIsSubmitted(true);
+        } else {
+          const data = await response.json();
+          setErrorMessages({ name: "server", message: data.message || "Erreur lors de la création du compte" });
+        }
+      } catch (error) {
+        setErrorMessages({ name: "server", message: "Erreur de connexion au serveur" });
+      }
     }
   };
 
-  // Generate JSX code for error message
+  // Génère le code JSX pour le message d'erreur
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
     );
 
-  // JSX code for sign up form
+  // Code JSX pour le formulaire d'inscription
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>

@@ -14,10 +14,10 @@ const {
   verifyToken,
 } = require("../../../services/middlewares/auth");
 
-// Route to add a new item
+// Route to add a new user
 router.post("/connexion", connexion);
 
-// Route to add a new item
+// Route to add a new user
 router.post("/register", hashPassword, add);
 
 // Route to logout the user
