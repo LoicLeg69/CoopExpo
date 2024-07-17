@@ -93,7 +93,7 @@ function Login() {
     <div className="login-form">
       <div className="title">Se connecter</div>
       {isSubmitted ? <div>Connecté avec succès</div> : renderForm}
-      <Link to="/connexion" className="create">
+      <Link to="/createUser" className="create">
         <p>Créez un compte</p>
       </Link>
     </div>

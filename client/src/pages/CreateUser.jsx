@@ -1,7 +1,7 @@
 import Signup from "../components/Login/Signup";
 import "../App.css";
 
-function Connexion() {
+function CreateUser() {
   return (
     <main className="container">
       <section className="text-box">
@@ -11,7 +11,7 @@ function Connexion() {
       <footer>
         Checkpoint 4 de &nbsp;
         <a
-          href="https://www.wildcodeschool.com/"
+          href="https://github.com/LoicLeg69"
           className="block-primary-main"
           target="_blank"
           rel="noopener noreferrer"
@@ -23,4 +23,4 @@ function Connexion() {
   );
 }
 
-export default Connexion;
+export default CreateUser;

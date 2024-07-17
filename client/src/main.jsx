@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Connexion from "./pages/Connexion";
+import CreateUser from "./pages/CreateUser";
 
 const router = createBrowserRouter([
  {
@@ -13,9 +13,9 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/connexion",
-    id: "connexion",
-    element: <Connexion />,
+    path: "/createUser",
+    id: "createUser",
+    element: <CreateUser />,
   },
 ]);
 
