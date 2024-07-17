@@ -49,7 +49,7 @@ function ProjectsUser() {
       </div>
 
       <div className="projects-container">
-        <h1 className="project-title">Mes projets</h1>
+        <h1>Mes projets</h1>
         <Link to="/createProject">
           <button type="button" className="project-button">
             Ajouter un projet
@@ -57,17 +57,22 @@ function ProjectsUser() {
         </Link>
       </div>
 
+      <div className="cards">
       {projects.map((project) => (
         <div className="project-card" key={project.id}>
           <img alt="imgProv" src="src/assets/images/loupe.png" />
           <div className="project-description">
-            <p className="project-title">{project.title}</p>
-            <p>Stack Technique : {project.stack_technique}</p>
-            <p>Outils de gestion : {project.project_management}</p>
-            <p>Description : {project.description}</p>
+            <h2 >{project.title}</h2>
+            <h4>Stack Technique :</h4>
+            <p>{project.stack_technique}</p>
+            <h4>Outils de gestion :</h4>
+            <p>{project.project_management}</p>
+            <h4>Description :</h4>
+            <p>{project.description}</p>
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }

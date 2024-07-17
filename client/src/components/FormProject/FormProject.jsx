@@ -5,31 +5,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./FormProject.css";
 
 function CreateProject() {
-  // États React
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const ApiUrl = import.meta.env.VITE_API_URL;
 
-  // Définition des messages d'erreur
   const errors = {
     title: "Titre invalide",
-    stack: "Stack technique invalide",
+    stack_technique: "Stack technique invalide",
     management: "Gestion de projet invalide",
     description: "Description invalide",
   };
 
   const navigate = useNavigate();
 
-  // Fonction pour afficher une notification de succès
   const notifySuccess = (text) => toast.success(text);
 
-  // Fonction pour afficher une notification d'échec
   const notifyFail = (text) => toast.error(text);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { title, stack, management, description, userId } = event.target.elements;
+    const { title, stack, management, description} = event.target.elements;
 
     if (title.value.length < 3) {
       setErrorMessages({ name: "title", message: errors.title });
@@ -51,7 +47,6 @@ function CreateProject() {
             stack_technique: stack.value,
             project_management: management.value,
             description: description.value,
-            user_id: parseInt(userId.value, 10), // Assuming userId is an integer
           }),
         });
 
@@ -73,15 +68,13 @@ function CreateProject() {
     }
   };
 
-  // Génère le code JSX pour le message d'erreur
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
     );
 
-  // Code JSX pour le formulaire de création de projet
   const renderForm = (
-    <div className="form">
+    <div className="new-form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label htmlFor="title">Titre du projet</label>
@@ -127,22 +120,11 @@ function CreateProject() {
             name="description"
             placeholder="Description"
             required
-           />
+          />
           {renderErrorMessage("description")}
         </div>
-        <div className="input-container">
-          <label htmlFor="userId">ID utilisateur</label>
-          <input
-            type="number"
-            className="input-field"
-            id="userId"
-            name="userId"
-            placeholder="ID utilisateur"
-            required
-          />
-        </div>
         <div className="button-container">
-          <input type="submit" value="Créer" />
+          <input type="submit" value="Ajouter" />
         </div>
       </form>
     </div>
