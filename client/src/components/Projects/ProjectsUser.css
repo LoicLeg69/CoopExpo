@@ -1,0 +1,64 @@
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: row-reverse; /* Changement de la direction à row pour placer l'image à droite */
+  justify-content: space-around;
+  align-items: center; /* Pour aligner les éléments verticalement */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Augmentation de la largeur max */
+  width: 350px;
+  margin-top: 10px;
+  background-color: #fff;
+  color: black;
+  gap: 20px;
+}
+
+.project-card img {
+  width: 30%;
+  height: auto;
+  border-radius: 5px; /* Coins arrondis */
+  border: solid 1px #ea5679;
+  padding: 10px;
+}
+
+.project-info {
+  flex: 2; /* Contenu texte prend 2 fois plus de place que l'image */
+}
+
+.project-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.project-description {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.project-button {
+  cursor: pointer;
+  font-size: 15px;
+  background: #ea5679;
+  border: 1px solid #ea5679;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.project-button:hover {
+  background: #ff6b8e;
+  border: 1px solid #ff6b8e;
+}

@@ -83,7 +83,9 @@ function Login() {
         </div>
 
         <div className="button-container">
-          <input type="submit" />
+          <Link to="/projects">
+            <input type="submit" value="Se connecter" />
+          </Link>
         </div>
       </form>
     </div>
