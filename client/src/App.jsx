@@ -58,7 +58,7 @@ function App() {
 
       <section className="text-box">
         <h2 className="block-primary">
-          <span className="block-primary-main">Harmonia</span>
+          <span className="block-primary-main">CoopExpo</span>
           <span className="block-primary-sub">Votre framework JavaScript</span>
         </h2>
         <a
@@ -74,7 +74,7 @@ function App() {
       <footer>
         Développé par la&nbsp;
         <a
-          href="https://www.wildcodeschool.com/"
+          href="https://github.com/LoicLeg69"
           className="wcs"
           target="_blank"
           rel="noopener noreferrer"
