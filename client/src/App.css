@@ -9,39 +9,19 @@ body {
 
 .container {
   height: 100vh;
-  background-image: url("./assets/images/background.webp");
+  background-image: url("./assets/images/pilat.png");
   background-size: cover;
   background-position: top;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 30px;
 }
 
 .logo {
-  font-size: 20px;
   margin-top: 16px;
-}
-
-.navbar ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #eee;
-  display: flex;
-  gap: 5px;
-  justify-content: end;
-  margin-top: auto;
-  font-size: 15px;
-}
-
-.navbar a:hover {
-  scale: 110%;
+  height: 200px;
+  border-radius: 20px;
 }
 
 .text-box {
@@ -58,10 +38,10 @@ body {
 }
 
 .block-primary-main {
-  font-size: 50px;
+  font-size: 15px;
   font-weight: 400;
   letter-spacing: 5px;
-  animation: blink 12s infinite;
+  animation: blink 3s infinite;
 }
 
 .block-primary-sub {
@@ -69,17 +49,6 @@ body {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 7px;
-}
-
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 10px 20px;
-  display: inline-block;
-  border-radius: 100px;
-  transition: all 0.2s;
-  position: relative;
 }
 
 .btn:hover {
@@ -100,8 +69,7 @@ body {
 
 footer {
   position: absolute;
-  top: 85%;
-  left: 75%;
+  top: 95%;
 }
 
 .wcs {
@@ -114,26 +82,22 @@ footer {
 }
 
 @media screen and (max-width: 760px) {
-  .logo {
-    display: none;
-  }
-
   .container {
     justify-content: center;
   }
-
-  footer {
-    position: absolute;
-    top: 85%;
-    left: 20%;
-  }
 }
 
-@media screen and (min-width: 761px) and (max-width: 960px) {
+@media screen and (min-width: 761px) {
   footer {
     position: absolute;
-    top: 85%;
-    left: 60%;
+    top: 95%;
+    left: 1%;
+  }
+  .text-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 250px;
   }
 }
 
@@ -156,9 +120,9 @@ footer {
       0 0 5px #ff1493ad,
       0 0 15px #eee,
       0 0 20px #ff1493ad,
-      0 0 40px #a00ac9,
+      0 0 40px #ad6767,
       0 0 60px #ff0000,
-      0 0 10px #970dc5,
+      0 0 10px #ad6767,
       0 0 98px #ff0000;
     color: #fff;
   }
