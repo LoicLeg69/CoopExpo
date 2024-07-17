@@ -1,62 +1,66 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./Login.css";
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+// import { useUserContext } from '../../contexts/UserContext';
+import './Login.css';
 
 function Login() {
-  // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const ApiUrl = import.meta.env.VITE_API_URL;
+  const notifySuccess = (username) => toast.success(`Bienvenue, ${username} !`);
+  const notifyFail = () => toast.error("Une erreur s'est produite");
+  const navigate = useNavigate();
+  
+  // Utilisation du contexte UserContext
+  // const { login } = useUserContext();
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1",
-    },
-    {
-      username: "user2",
-      password: "pass2",
-    },
-  ];
+  const [loginInfos, setLoginInfos] = useState({
+    mail: '',
+    password: '',
+  });
 
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password",
+  const handleLoginInfos = (e) => {
+    setLoginInfos({ ...loginInfos, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (event) => {
-    // Prevent page reload
-    event.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (loginInfos.mail.trim() === '' || loginInfos.password.trim() === '') {
+      console.error('Mail and password must be non-empty strings');
+      return;
+    }
 
-    const { uname, pass } = document.forms[0];
+    try {
+      // Appel à l'API pour demander une connexion
+      const response = await fetch(`${ApiUrl}/auth/connexion`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(loginInfos),
+      });
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
+      if (response.status === 200) {
+        const responseData = await response.json();
+        console.info('API response:', responseData);
+        if (responseData.user) {
+          const { username } = responseData.user;
+          // login(responseData.user);
+          navigate('/projects');
+          notifySuccess(username);
+        } else {
+          console.error('User object is missing in the response');
+        }
       } else {
-        setIsSubmitted(true);
+        console.info('Login failed with status:', response.status);
+        notifyFail();
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
+    } catch (error) {
+      console.error('Error during login:', error);
     }
   };
 
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-
-  // JSX code for login form
   const renderForm = (
     <div className="form">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className="input-container">
           <label htmlFor="mail">Adresse mail</label>
           <input
@@ -65,9 +69,10 @@ function Login() {
             id="mail"
             name="mail"
             placeholder="Adresse mail"
+            value={loginInfos.mail}
+            onChange={handleLoginInfos}
             required
           />
-          {renderErrorMessage("mail")}
         </div>
         <div className="input-container">
           <label htmlFor="pass">Mot de passe</label>
@@ -75,17 +80,16 @@ function Login() {
             type="password"
             className="input-field"
             id="pass"
-            name="pass"
+            name="password"
             placeholder="Mot de passe"
+            value={loginInfos.password}
+            onChange={handleLoginInfos}
             required
           />
-          {renderErrorMessage("pass")}
         </div>
 
         <div className="button-container">
-          <Link to="/projects">
-            <input type="submit" value="Se connecter" />
-          </Link>
+          <input type="submit" value="Se connecter" />
         </div>
       </form>
     </div>
@@ -94,7 +98,7 @@ function Login() {
   return (
     <div className="login-form">
       <div className="title">Se connecter</div>
-      {isSubmitted ? <div>Connecté avec succès</div> : renderForm}
+      {renderForm}
       <Link to="/createUser" className="create">
         <p>Créez un compte</p>
       </Link>
