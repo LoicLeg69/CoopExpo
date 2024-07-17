@@ -1,25 +1,35 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Login.css";
 
 function Signup() {
   // États React
   const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState();
   const ApiUrl = import.meta.env.VITE_API_URL;
 
+  // Définition des messages d'erreur
   const errors = {
     uname: "Nom d'utilisateur invalide",
     mail: "Adresse mail invalide",
     pass: "Mot de passe invalide",
   };
 
+  const navigate = useNavigate();
+
+  // Fonction pour afficher une notification de succès
+  const notifySuccess = (text) => toast.success(text);
+
+  // Fonction pour afficher une notification d'échec
+  const notifyFail = (text) => toast.error(text);
+
   const handleSubmit = async (event) => {
-    // Empêche le rechargement de la page
     event.preventDefault();
-
-    const { uname, mail, pass } = document.forms[0];
-
-    // Vérifications simples
+  
+    const { uname, mail, pass } = event.target.elements;
+  
     if (uname.value.length < 3) {
       setErrorMessages({ name: "uname", message: errors.uname });
     } else if (!/\S+@\S+\.\S+/.test(mail.value)) {
@@ -39,15 +49,21 @@ function Signup() {
             password: pass.value,
           }),
         });
-
+  
         if (response.ok) {
           setIsSubmitted(true);
+          notifySuccess("Votre profil a bien été créé. Vous pouvez vous connecter");
+          setTimeout(() => {
+            navigate("/");
+          }, 2000); 
         } else {
           const data = await response.json();
           setErrorMessages({ name: "server", message: data.message || "Erreur lors de la création du compte" });
+          notifyFail("Une erreur s'est produite");
         }
       } catch (error) {
         setErrorMessages({ name: "server", message: "Erreur de connexion au serveur" });
+        notifyFail("Une erreur s'est produite");
       }
     }
   };
