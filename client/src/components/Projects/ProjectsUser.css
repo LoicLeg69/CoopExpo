@@ -62,3 +62,22 @@
   background: #ff6b8e;
   border: 1px solid #ff6b8e;
 }
+
+.logout-container {
+  padding-top: 10px;
+  right: 10px;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #ea5679; /* Rouge */
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f; /* Rouge plus foncé au survol */
+}

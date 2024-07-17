@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import "./ProjectsUser.css";
 
 // const projects = [
@@ -19,14 +20,20 @@ import "./ProjectsUser.css";
 function ProjectsUser() {
   return (
     <div>
+      {/* Bouton de déconnexion en haut à droite */}
+      <div className="logout-container">
+        <Link to="/" className="logout-button">Déconnexion</Link>
+      </div>
+      
       <div className="projects-container">
         <h1 className="project-title">Mes projets</h1>
         <button type="button" className="project-button">
           Ajouter un projet
         </button>
       </div>
+      
       <div className="project-card">
-        <img alt="imgProv" src="src/assets/images/testvision.png" />
+        <img alt="imgProv" src="src/assets/images/loupe.png" />
         <div className="project-description">
           <p className="project-title">Nom du projet</p>
           <p>Stack Technique :</p>

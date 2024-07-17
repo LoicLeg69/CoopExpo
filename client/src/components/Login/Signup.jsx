@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Login.css";
 
 function Signup() {
@@ -80,7 +79,7 @@ function Signup() {
         </div>
 
         <div className="button-container">
-          <input type="submit" />
+          <input type="submit" value="Créer" />
         </div>
       </form>
     </div>
@@ -89,10 +88,7 @@ function Signup() {
   return (
     <div className="login-form">
       <div className="title">Créer un compte</div>
-      {isSubmitted ? <div>Compte créé avec succès</div> : renderForm}
-      <Link to="/" className="login">
-        <p>Se connecter</p>
-      </Link>
+      {isSubmitted === true ? <div>Compte créé avec succès</div> : renderForm}
     </div>
   );
 }
