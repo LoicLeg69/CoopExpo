@@ -1,12 +1,29 @@
-import { Link, useNavigate  } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./ProjectsUser.css";
-
-// import { useUserContext } from "../../contexts/UserContext"; // Importer le contexte utilisateur
 
 function ProjectsUser() {
   const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
+  const ApiUrl = import.meta.env.VITE_API_URL;
+  
+  useEffect(() => {
+    // Fonction pour récupérer les projets depuis l'API
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${ApiUrl}/project`); // Utilisez les backticks ici
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des projets");
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des projets :", error);
+      }
+    };
 
-  // const { logout } = useUserContext();
+    fetchProjects();
+  }, []);
 
   const handleLogout = () => {
     // Déconnecter l'utilisateur
@@ -33,20 +50,24 @@ function ProjectsUser() {
 
       <div className="projects-container">
         <h1 className="project-title">Mes projets</h1>
-        <button type="button" className="project-button">
-          Ajouter un projet
-        </button>
+        <Link to="/createProject">
+          <button type="button" className="project-button">
+            Ajouter un projet
+          </button>
+        </Link>
       </div>
 
-      <div className="project-card">
-        <img alt="imgProv" src="src/assets/images/loupe.png" />
-        <div className="project-description">
-          <p className="project-title">Nom du projet</p>
-          <p>Stack Technique :</p>
-          <p>Outils de gestion :</p>
-          <p>Description :</p>
+      {projects.map((project) => (
+        <div className="project-card" key={project.id}>
+          <img alt="imgProv" src="src/assets/images/loupe.png" />
+          <div className="project-description">
+            <p className="project-title">{project.title}</p>
+            <p>Stack Technique : {project.stack_technique}</p>
+            <p>Outils de gestion : {project.project_management}</p>
+            <p>Description : {project.description}</p>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }

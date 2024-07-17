@@ -1,11 +1,11 @@
-import ProjectsUser from "../components/Projects/ProjectsUser";
+import Signup from "../components/Login/Signup";
 import "../App.css";
 
-function Projects() {
+function CreateProject() {
   return (
     <main className="container">
       <section className="text-box">
-        <ProjectsUser />
+        <Signup />
       </section>
 
       <footer>
@@ -23,4 +23,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default CreateProject;

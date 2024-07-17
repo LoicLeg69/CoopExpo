@@ -6,6 +6,7 @@ function CreateUser() {
     <main className="container">
       <section className="text-box">
         <Signup />
+        
       </section>
 
       <footer>
