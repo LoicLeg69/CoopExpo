@@ -10,7 +10,8 @@ CREATE TABLE project (
     title VARCHAR(255) NOT NULL,
     stack_technique VARCHAR(255) NOT NULL,
     project_management VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    image VARCHAR(255) NOT NULL
     -- user_id INT UNSIGNED NOT NULL,
     -- FOREIGN KEY (user_id) REFERENCES user(id)
 );

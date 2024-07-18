@@ -13,8 +13,8 @@ class ProjectRepository extends AbstractRepository {
 
  // Execute the SQL INSERT query to add a new Project to the "project" table
 const [result] = await this.database.query(
-  `INSERT INTO project (title, stack_technique, project_management, description) VALUES (?, ?, ?, ?)`,
-  [project.title, project.stack_technique, project.project_management, project.description]
+  `INSERT INTO project (title, stack_technique, project_management, description, image) VALUES (?, ?, ?, ?, ?)`,
+  [project.title, project.stack_technique, project.project_management, project.description, project.image]
 );
 
     // Return the ID of the newly inserted Recipe

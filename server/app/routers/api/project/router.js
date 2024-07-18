@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../../../services/multerConfig")
 
 const router = express.Router();
 
@@ -9,8 +10,7 @@ const { browse, add, read, destroy } = require(`../../../controllers/projectActi
 router.get("/", browse);
 router.get("/read", read);
 
-
-router.post("/", add);
+router.post("/", upload.single('image'), add);
 
 // Route to delete an item
 router.delete("/delete", destroy);

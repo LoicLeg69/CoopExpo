@@ -1,3 +1,6 @@
+/* eslint-disable camelcase */
+const path = require("path");
+
 // Import access to database tables
 const tables = require("../../database/tables");
 
@@ -40,9 +43,19 @@ const read = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the project data from the request body
-  const project = req.body;
+  const { title, stack_technique, project_management, description} = req.body;
+
+  const image = req.file ? path.basename(req.file.path) : null; // Utilise seulement le nom de fichier
 
   try {
+    const project = {
+      title,
+      stack_technique,
+      project_management,
+      description,
+      image,
+    };
+
     // Insert the project into the database
     const insertId = await tables.project.create(project);
 
