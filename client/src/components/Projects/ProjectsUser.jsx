@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "./ProjectsUser.css";
 
 function ProjectsUser() {
@@ -27,11 +28,25 @@ function ProjectsUser() {
 
   const handleLogout = () => {
     navigate("/");
+    toast.info("Déconnexion réussie.");
   };
 
+  const fetchUpdatedProjects = async () => {
+    try {
+      const response = await fetch(`${ApiUrl}/project`);
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des projets après suppression");
+      }
+      const data = await response.json();
+      setProjects(data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des projets après suppression :", error);
+    }
+  };
+  
   const handleDeleteProject = async () => {
     if (!selectedProjectId) return;
-
+  
     try {
       const response = await fetch(`${ApiUrl}/project/delete`, {
         method: "DELETE",
@@ -40,20 +55,29 @@ function ProjectsUser() {
         },
         body: JSON.stringify({ id: selectedProjectId }),
       });
-
+  
       if (!response.ok) {
         throw new Error("Erreur lors de la suppression du projet");
       }
-
+  
+      // Mise à jour de l'état local après la suppression
       setProjects((prevProjects) =>
         prevProjects.filter((project) => project.id !== selectedProjectId)
       );
-      setSelectedProjectId(null); // Reset selection after deletion
+      setSelectedProjectId(null); // Réinitialisation de la sélection après la suppression
+  
+      // Fetch à nouveau la liste des projets pour mise à jour
+      fetchUpdatedProjects();
+  
+      // Afficher un toast de succès
+      toast.success("Projet supprimé avec succès !");
     } catch (error) {
       console.error("Erreur lors de la suppression du projet :", error);
+      // Afficher un toast d'erreur
+      toast.error("Erreur lors de la suppression du projet.");
     }
   };
-
+  
   return (
     <div>
       <div className="logout-container">

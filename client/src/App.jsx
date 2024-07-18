@@ -13,15 +13,15 @@ function App() {
         </main>
         <ToastContainer
           position="bottom-right"
-          autoClose={4000}
+          autoClose={5000}
           hideProgressBar={false}
-          newestOnTop
-          closeOnClick
+          newestOnTop={false}
+          closeOnClick={false}
           rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="colored"
+          theme="dark"
         />
       </div>
     </UserProvider>

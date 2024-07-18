@@ -3,12 +3,17 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import App from "./App";
 import Home from "./pages/Home";
 import CreateUser from "./pages/CreateUser";
 import Projects from "./pages/ProjectsPage";
 import CreateProject from "./pages/CreateProject";
 
 const router = createBrowserRouter([
+  {
+    element: <App />,
+    id: "app",
+    children: [
  {
     path: "/",
     id: "homePage",
@@ -29,6 +34,8 @@ const router = createBrowserRouter([
     id: "createProject",
     element: <CreateProject />,
   },
+],
+},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

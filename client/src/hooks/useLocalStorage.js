@@ -10,6 +10,9 @@ const useLocalStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => getStorageValue(key, defaultValue));
 
   useEffect(() => {
+    // console.log("coucou");
+    // console.log(storedVal);
+    // console.log(key);
     const storedVal = typeof value === "object" ? JSON.stringify(value) : value;
     localStorage.setItem(key, storedVal);
   }, [value, key]);

@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const UserContext = createContext();
 export default function UserProvider({ children }) {
   const ApiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  // console.log("coucou")
+
   const [user, setUser] = useLocalStorage("user", "");
   const login = (userData) => {
     setUser(userData);

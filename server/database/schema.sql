@@ -1,7 +1,7 @@
 CREATE TABLE user (
     id INT unsigned AUTO_INCREMENT PRIMARY KEY NOT NULL,
     username VARCHAR(255) NOT NULL,
-    mail VARCHAR(255) NOT NULL,
+    mail VARCHAR(255) NOT NULL unique,
     password VARCHAR(255) NOT NULL
 );
 

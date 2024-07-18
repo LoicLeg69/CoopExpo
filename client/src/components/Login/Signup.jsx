@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link  } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./Login.css";
@@ -126,6 +126,9 @@ function Signup() {
     <div className="login-form">
       <div className="title">Créer un compte</div>
       {isSubmitted === true ? <div>Compte créé avec succès</div> : renderForm}
+      <Link to="/" className="create">
+        <p>Retour</p>
+      </Link>
     </div>
   );
 }
