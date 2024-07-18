@@ -2,31 +2,38 @@ body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.7;
   color: #eee;
   margin: 0;
-}
-
-.container {
-  height: 100vh;
   background-image: url("./assets/images/pilat.png");
   background-size: cover;
   background-position: top;
-  position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  min-height: 100vh; /* Ensure body takes up at least the full viewport height */
+}
+
+.container {
+  flex: 1; /* Make the container expand to fill the available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically */
+  padding: 20px; /* Adjust padding as needed */
 }
 
 .logo {
-  margin-top: 16px;
   height: 200px;
   border-radius: 20px;
 }
 
 .text-box {
-  margin: 0 auto;
   text-align: center;
+  flex: 1; /* Ensure text box expands to fill available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .block-primary {
@@ -42,10 +49,23 @@ body {
 }
 
 .block-primary-sub {
-  display: block;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 7px;
+  display: block;
+}
+
+.btn {
+  margin-top: 20px; /* Adjust margin as needed */
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .btn:hover {
@@ -65,8 +85,9 @@ body {
 }
 
 footer {
-  position: absolute;
-  top: 95%;
+  margin-top: 20px; /* Adjust margin as needed */
+  text-align: center;
+  color: #777;
 }
 
 .wcs {
@@ -80,21 +101,8 @@ footer {
 
 @media screen and (max-width: 760px) {
   .container {
-    justify-content: center;
-  }
-}
-
-@media screen and (min-width: 761px) {
-  footer {
-    position: absolute;
-    top: 95%;
-    left: 1%;
-  }
-  .text-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 250px;
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: center; /* Center items horizontally */
   }
 }
 

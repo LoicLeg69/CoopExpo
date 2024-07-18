@@ -130,10 +130,10 @@ function ProjectsUser() {
 
       <div className="cards">
         {projects.map((project) => (
-          <div className="project-card" key={project.id}>
+        <div className="project-card" key={project.id}>
             <img alt="imgProv" src="src/assets/images/loupe.png" />
             <div className="project-description">
-              <h2>{project.title}</h2>
+              <h3>{project.title}</h3>
               <h4>Stack Technique :</h4>
               <p>{project.stack_technique}</p>
               <h4>Outils de gestion :</h4>
