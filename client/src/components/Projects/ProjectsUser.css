@@ -1,3 +1,5 @@
+/* ProjectsUser.css */
+
 .projects-container {
   display: flex;
   flex-wrap: wrap;
@@ -60,8 +62,9 @@
 }
 
 .logout-container {
-  padding-top: 10px;
-  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
 }
 
 .logout-button {
@@ -89,4 +92,37 @@
     flex-direction: row;
     gap: 100px;
   }
+}
+
+.delete-project-container {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.delete-project-container select {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-button:hover:not(:disabled),
+.delete-button:focus:not(:disabled) {
+  background-color: #ff1a1a;
+  outline: none;
 }

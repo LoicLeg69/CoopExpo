@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateUser from "./pages/CreateUser";
 import Projects from "./pages/ProjectsPage";
-import FormProject from "./components/FormProject/FormProject";
+import CreateProject from "./pages/CreateProject";
 
 const router = createBrowserRouter([
  {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: "/createProject",
     id: "createProject",
-    element: <FormProject />,
+    element: <CreateProject />,
   },
 ]);
 

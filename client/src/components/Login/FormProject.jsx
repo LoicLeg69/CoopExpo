@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./FormProject.css";
+import "./Login.css";
 
-function CreateProject() {
+function Create() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const ApiUrl = import.meta.env.VITE_API_URL;
@@ -138,4 +138,4 @@ function CreateProject() {
   );
 }
 
-export default CreateProject;
+export default Create;

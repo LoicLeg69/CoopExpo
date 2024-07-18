@@ -5,13 +5,13 @@ import "./ProjectsUser.css";
 function ProjectsUser() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
   const ApiUrl = import.meta.env.VITE_API_URL;
-  
+
   useEffect(() => {
-    // Fonction pour récupérer les projets depuis l'API
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${ApiUrl}/project`); // Utilisez les backticks ici
+        const response = await fetch(`${ApiUrl}/project`);
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des projets");
         }
@@ -26,9 +26,32 @@ function ProjectsUser() {
   }, []);
 
   const handleLogout = () => {
-    // Déconnecter l'utilisateur
-    // logout(false);
-    navigate("/"); // Rediriger vers la page d'accueil après la déconnexion
+    navigate("/");
+  };
+
+  const handleDeleteProject = async () => {
+    if (!selectedProjectId) return;
+
+    try {
+      const response = await fetch(`${ApiUrl}/project/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: selectedProjectId }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la suppression du projet");
+      }
+
+      setProjects((prevProjects) =>
+        prevProjects.filter((project) => project.id !== selectedProjectId)
+      );
+      setSelectedProjectId(null); // Reset selection after deletion
+    } catch (error) {
+      console.error("Erreur lors de la suppression du projet :", error);
+    }
   };
 
   return (
@@ -57,21 +80,45 @@ function ProjectsUser() {
         </Link>
       </div>
 
+      <div className="delete-project-container">
+        <select
+          value={selectedProjectId || ""}
+          onChange={(e) => setSelectedProjectId(e.target.value)}
+        >
+          <option value="" disabled>
+            Sélectionner un projet à supprimer
+          </option>
+          {projects.map((project) => (
+            <option key={project.id} value={project.id}>
+              {project.title}
+            </option>
+          ))}
+        </select>
+        <button
+          type="button"
+          className="delete-button"
+          onClick={handleDeleteProject}
+          disabled={!selectedProjectId}
+        >
+          Supprimer le projet
+        </button>
+      </div>
+
       <div className="cards">
-      {projects.map((project) => (
-        <div className="project-card" key={project.id}>
-          <img alt="imgProv" src="src/assets/images/loupe.png" />
-          <div className="project-description">
-            <h2 >{project.title}</h2>
-            <h4>Stack Technique :</h4>
-            <p>{project.stack_technique}</p>
-            <h4>Outils de gestion :</h4>
-            <p>{project.project_management}</p>
-            <h4>Description :</h4>
-            <p>{project.description}</p>
+        {projects.map((project) => (
+          <div className="project-card" key={project.id}>
+            <img alt="imgProv" src="src/assets/images/loupe.png" />
+            <div className="project-description">
+              <h2>{project.title}</h2>
+              <h4>Stack Technique :</h4>
+              <p>{project.stack_technique}</p>
+              <h4>Outils de gestion :</h4>
+              <p>{project.project_management}</p>
+              <h4>Description :</h4>
+              <p>{project.description}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
     </div>
   );
