@@ -125,13 +125,16 @@ h4 {
   }
   .cards {
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 50px;
   }
 
   .project-card {
     flex: 0 1 calc(33.33% - 40px); /* Ajuster la largeur des cartes pour qu'elles occupent environ un tiers de la largeur */
-
+    height: 300px;
+    min-width: 300px;
     display: flex;
     flex-wrap: nowrap;
   }
