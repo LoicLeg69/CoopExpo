@@ -1,8 +1,11 @@
 const AbstractSeeder = require("./AbstractSeeder");
 
+const UserSeeder = require("./UserSeeder")
+
+
 class ProjectSeeder extends AbstractSeeder {
   constructor() {
-    super({ table: "project", truncate: true });
+    super({ table: "project", truncate: true, dependencies: [UserSeeder] });
   }
 
   run() {
@@ -14,7 +17,7 @@ class ProjectSeeder extends AbstractSeeder {
         project_management: "Trello / Scrum (Sprint 1 semaine, Code review, Poker planning, Spécification des tickets, Démo fin de sprint, Rétrospective)",
         description: " utilisation HTML, CSS, gestion d'évènements avec JavaScript (onClick, eventListener), incrémentation du score.",
         image: "wildNoise.png",
-        // user_id: 1, // Assurez-vous que cet utilisateur existe dans la table `user`
+        user_id: 1, 
       },
       {
         id: 2,
@@ -23,7 +26,7 @@ class ProjectSeeder extends AbstractSeeder {
         project_management: "Trello / Scrum (Sprint 1 semaine, Code review, Poker planning, Spécification des tickets, Démo fin de sprint, Rétrospective)",
         description: "utilisation des Loaders, React Router, des Hooks (useEffect, useState, etc...), fetch et axios API, Context.",
         image: "cover4you.png",
-        // user_id: 2, // Assurez-vous que cet utilisateur existe dans la table `user`
+        user_id: 2, 
       },
     ];
 

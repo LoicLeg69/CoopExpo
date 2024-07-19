@@ -13,8 +13,8 @@ class ProjectRepository extends AbstractRepository {
 
  // Execute the SQL INSERT query to add a new Project to the "project" table
 const [result] = await this.database.query(
-  `INSERT INTO project (title, stack_technique, project_management, description, image) VALUES (?, ?, ?, ?, ?)`,
-  [project.title, project.stack_technique, project.project_management, project.description, project.image]
+  `INSERT INTO project (title, stack_technique, project_management, description, image, user_id) VALUES (?, ?, ?, ?, ?, ?)`,
+  [project.title, project.stack_technique, project.project_management, project.description, project.image, project.user_id]
 );
 
     // Return the ID of the newly inserted Recipe
@@ -54,6 +54,21 @@ const [result] = await this.database.query(
 
     return true; // Return true to indicate that the project has been deleted
   }
+
+  async readByUser(userId) {
+    // Execute the SQL SELECT query to retrieve all rows from the "project" table
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} 
+       INNER JOIN user ON project.user_id = user.id 
+       WHERE user.id = ?`,
+      [userId]
+    );
+  
+    // Return the array of rows
+    return rows;
+  }
+  
+
 }
 
 module.exports = ProjectRepository;

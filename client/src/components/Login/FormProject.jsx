@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUserContext } from "../../contexts/UserContext"; // Import du hook useUserContext
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 function Create() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { user } = useUserContext(); // Utilisation du contexte pour obtenir les informations utilisateur
   const ApiUrl = import.meta.env.VITE_API_URL;
 
   const errors = {
@@ -15,6 +17,7 @@ function Create() {
     management: "Gestion de projet invalide",
     description: "Description invalide",
     image: "Image invalide",
+    user_id: "ID utilisateur invalide"
   };
 
   const navigate = useNavigate();
@@ -27,6 +30,7 @@ function Create() {
     event.preventDefault();
 
     const { title, stack, management, description, image } = event.target.elements;
+
     if (title.value.length < 3) {
       setErrorMessages({ name: "title", message: errors.title });
     } else if (stack.value.length < 3) {
@@ -37,6 +41,8 @@ function Create() {
       setErrorMessages({ name: "description", message: errors.description });
     } else if (!image.files[0]) {
       setErrorMessages({ name: "image", message: errors.image });
+    } else if (!user.userId) { // Vérification de userId depuis le contexte
+      setErrorMessages({ name: "user_id", message: errors.user_id });
     } else {
       const formData = new FormData();
       formData.append("title", title.value);
@@ -44,6 +50,7 @@ function Create() {
       formData.append("project_management", management.value);
       formData.append("description", description.value);
       formData.append("image", image.files[0]);
+      formData.append("user_id", user.userId); // Utilisation de userId depuis le contexte
 
       try {
         const response = await fetch(`${ApiUrl}/project`, {
@@ -135,7 +142,7 @@ function Create() {
           <input
             type="file"
             name="image"
-            accept="/"
+            accept="image/*"
             required
           />
           {renderErrorMessage("image")}

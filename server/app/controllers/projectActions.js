@@ -43,7 +43,7 @@ const read = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the project data from the request body
-  const { title, stack_technique, project_management, description} = req.body;
+  const { title, stack_technique, project_management, description, user_id} = req.body;
 
   const image = req.file ? path.basename(req.file.path) : null; // Utilise seulement le nom de fichier
 
@@ -54,6 +54,7 @@ const add = async (req, res, next) => {
       project_management,
       description,
       image,
+      user_id,
     };
 
     // Insert the project into the database
