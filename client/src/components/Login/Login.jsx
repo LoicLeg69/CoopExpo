@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// import { useUserContext } from '../../contexts/UserContext';
+import { useUserContext } from '../../contexts/UserContext'; // Import du hook useUserContext
 import './Login.css';
 
 function Login() {
@@ -9,9 +9,9 @@ function Login() {
   const notifySuccess = (username) => toast.success(`Bienvenue, ${username} !`);
   const notifyFail = () => toast.error("Une erreur s'est produite");
   const navigate = useNavigate();
-  
+
   // Utilisation du contexte UserContext
-  // const { login } = useUserContext();
+  const { login } = useUserContext(); // Récupération de la fonction login du contexte
 
   const [loginInfos, setLoginInfos] = useState({
     mail: '',
@@ -43,7 +43,7 @@ function Login() {
         console.info('API response:', responseData);
         if (responseData.user) {
           const { username } = responseData.user;
-          // login(responseData.user);
+          login(responseData.user); // Appel de la fonction login pour mettre à jour l'état utilisateur
           navigate('/projects');
           notifySuccess(username);
         } else {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUserContext } from '../../contexts/UserContext'; // Import du hook useUserContext
 import "./ProjectsUser.css";
 
 function ProjectsUser() {
@@ -10,6 +11,8 @@ function ProjectsUser() {
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const ApiUrl = import.meta.env.VITE_API_URL;
+
+  const { logout } = useUserContext(); // Récupération de la fonction logout du contexte
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -28,7 +31,8 @@ function ProjectsUser() {
     fetchProjects();
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout(); // Appel de la fonction logout pour déconnecter l'utilisateur
     navigate("/");
     toast.info("Déconnexion réussie.");
   };
