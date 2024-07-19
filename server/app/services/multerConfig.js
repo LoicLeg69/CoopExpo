@@ -6,9 +6,9 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, "../../../client/public/images"));
   },
   filename(req, file, cb) {
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const extension = path.extname(file.originalname);
-    cb(null, `image-${uniqueSuffix}${extension}`);
+    // Utiliser le nom original du fichier
+    const originalName = file.originalname;
+    cb(null, originalName);
   },
 });
 
