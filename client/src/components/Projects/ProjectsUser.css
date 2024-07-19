@@ -1,0 +1,176 @@
+.project-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  border: solid 2px #ea5679;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  max-height: 300px;
+  width: 100%; /* Utiliser 100% de la largeur disponible */
+  background-color: #fff;
+  color: black;
+  margin-top: 10px;
+  gap: 20px;
+}
+
+.project-card img {
+  width: 30%;
+  height: auto;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.project-description,
+h3,
+h4 {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  font-size: 10px;
+  margin: 5px;
+  padding-right: 10px;
+}
+
+.project-description > p {
+  font-size: 10px;
+}
+
+.project-button {
+  cursor: pointer;
+  font-size: 10px;
+  background: #ea5679;
+  border: 1px solid #ea5679;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.project-button:hover {
+  background: #ff6b8e;
+  border: 1px solid #ff6b8e;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #ea5679;
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-project-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.delete-project-container select {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.delete-button:hover:not(:disabled),
+.delete-button:focus:not(:disabled) {
+  background-color: #ff1a1a;
+  outline: none;
+}
+
+.go-user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.go-user-container select {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.go-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.go-button:hover:not(:disabled),
+.go-button:focus:not(:disabled) {
+  background-color: #ff1a1a;
+  outline: none;
+}
+
+@media screen and (min-width: 760px) {
+  .projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+  }
+  .cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .project-card {
+    flex: 0 1 calc(33.33% - 40px); /* Ajuster la largeur des cartes pour qu'elles occupent environ un tiers de la largeur */
+    height: 300px;
+    min-width: 300px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
